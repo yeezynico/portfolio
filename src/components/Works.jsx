@@ -9,23 +9,32 @@ const Works = () => {
       .then(data => setProjects(data.data))
       .catch(error => console.error('Error fetching data:', error));
   }, []);
-  console.log(clients);
 
   return (
     <div>
-      <p>Vous pourrez trouver ci-dessous la liste de mes projets. J'en ai réalisé certains lors de ma formation chez The Hacking Project, et d'autres sont des projets personnels.</p>
-      <ul>
+      <p className='center2'>Vous pourrez trouver ci-dessous la liste de mes projets. J'en ai réalisé certains lors de ma formation chez The Hacking Project, et d'autres sont des projets personnels.</p>
+      <div className='card_item'>
         {clients.map(project => (
-          <li key={project.id}>
+          <div key={project.id} className="project_card">
+            <img className='size_img' src={`http://localhost:1337${project.attributes.logo.data.attributes.url}`} alt={project.attributes.logo.data.attributes.name} />
             <h3>{project.attributes.nom}</h3>
             <p>{project.attributes.description}</p>
-            <img
-              src={`http://localhost:1337${project.attributes.logo.data.attributes.url}`}
-              alt={project.attributes.logo.data.attributes.name}
-            />
-          </li>
+
+            <button className="btn" type="button">
+              <strong><a href={project.attributes.URL}>CODE</a></strong>
+              <div id="container-stars">
+                <div id="stars"></div>
+              </div>
+
+              <div id="glow">
+                <div className="circle"></div>
+                <div className="circle"></div>
+              </div>
+            </button>
+
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
